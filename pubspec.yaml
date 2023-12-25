@@ -1,0 +1,22 @@
+name: chatify
+description: "A new Flutter project."
+publish_to: 'none'
+version: 0.1.0
+
+environment:
+  sdk: '>=3.3.0-237.0.dev <4.0.0'
+
+dependencies:
+  firebase_auth: ^4.15.3
+  firebase_core: ^2.24.2
+  flutter:
+    sdk: flutter
+  stream_chat_flutter: ^7.0.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+
+flutter:
+  uses-material-design: true
