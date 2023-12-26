@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "788259437251",
+    "project_id": "chattily-4a049",
+    "storage_bucket": "chattily-4a049.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:788259437251:android:e2dda1ff1ba3e3023d8076",
+        "android_client_info": {
+          "package_name": "com.singhthatcodes.chatify"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "788259437251-miki3jhhrlcooo8muof7a8v12hr8d9ks.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.singhthatcodes.chatify",
+            "certificate_hash": "5a6fcf8400c2ad9f923e15aa287054b402d5cbb8"
+          }
+        },
+        {
+          "client_id": "788259437251-3483guvg4qnlqq9d33rb9jjvjkgkhan2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAmNRuUNUbPp_fSET9DHbLi-Sr_cF2jKyU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "788259437251-3483guvg4qnlqq9d33rb9jjvjkgkhan2.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "788259437251-fqq9p31dqt2a0m7l8lfhv7qra9hkreed.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.singhthatcodes.chatify"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
