@@ -1,4 +1,5 @@
 import 'package:chatify/firebase_options.dart';
+import 'package:chatify/home.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -38,7 +39,8 @@ class MyApp extends StatelessWidget {
           fontWeight:FontWeight.w500,
         )
       ),
-      )
+      ),
+      home: Home(),
     );
   }
 }
