@@ -1,5 +1,7 @@
 import 'package:chatify/firebase_options.dart';
 import 'package:chatify/home.dart';
+import 'package:chatify/services/auth_services.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -40,7 +42,43 @@ class MyApp extends StatelessWidget {
         )
       ),
       ),
-      home: Home(),
+      home: const CheckAuthStatus(),
     );
+  }
+}
+class CheckAuthStatus extends StatefulWidget {
+  const CheckAuthStatus({Key? key}) : super(key: key);
+
+  @override
+  State<CheckAuthStatus> createState() => _CheckAuthStatusState();
+}
+
+class _CheckAuthStatusState extends State<CheckAuthStatus> {
+  @override
+  void initState() {
+    FirebaseAuth.instance.authStateChanges().listen(
+      (User? user) async {
+        if (user == null) {
+          // Authenticate user
+          AuthServices authServices = AuthServices();
+          await authServices.authenticateUser(context:context);
+        } else {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(
+              builder: (context) {
+                return Home();
+              },
+            ),
+          );
+        }
+      },
+    );
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(child: CircularProgressIndicator());
   }
 }
