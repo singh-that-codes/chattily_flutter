@@ -27,7 +27,7 @@ class _HomeState extends State<Home> {
           return SafeArea(
               child: Scaffold(
                 appBar: AppBar(
-                  leading: userPhoto(radius: 15, url: currentUserModeel.photo),
+                  leading: Center(child: userPhoto(radius: 15, url: currentUserModeel.photo)),
                   title: const Text("Chattily"),
                 ),
                 floatingActionButton: FloatingActionButton(

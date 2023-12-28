@@ -28,8 +28,10 @@ class AuthServices {
             await createUser(userCredential: userCredential).then(
               (created){
                 if(created) {
-                  Navigator.pushReplacement(context,
-                    MaterialPageRoute(builder: (context) {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context){
                   return Home();
                 }));
                 }

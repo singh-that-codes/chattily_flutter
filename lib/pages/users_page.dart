@@ -1,4 +1,5 @@
 import 'package:chatify/models/user_model.dart';
+import 'package:chatify/pages/chat_page.dart';
 import 'package:chatify/utils.dart';
 import 'package:chatify/widgets/user_photo.dart';
 import 'package:flutter/material.dart';
@@ -37,7 +38,10 @@ class _UsersPageState extends State<UsersPage> {
                       ? const SizedBox.shrink()
                       : ListTile(
                           onTap: () {
-                            // Handle onTap for the ListTile
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: (context) {
+                              return ChatPage(fromHome: false,user: user,);
+                            }));
                           },
                           leading: userPhoto(radius: 20, url: user.photo),
                           title: Text(
@@ -45,7 +49,10 @@ class _UsersPageState extends State<UsersPage> {
                             style: TextStyle(
                               color: Colors.black
                             ),
-                             
+                          ),
+                          subtitle: Text(
+                            user.email,
+                            style: TextStyle(color: Colors.black.withOpacity(0.8)),
                           ),
                         );
                 },
