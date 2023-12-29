@@ -1,3 +1,4 @@
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:chatify/models/user_model.dart';
 import 'package:chatify/pages/users_page.dart';
 import 'package:chatify/utils.dart';
@@ -6,7 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
 
 class Home extends StatefulWidget {
-  const Home({super.key});
+  final ReceivedAction? receivedAction;
+  const Home({super.key, required this.receivedAction});
 
   @override
   State<Home> createState() => _HomeState();

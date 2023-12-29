@@ -20,7 +20,7 @@ class AuthServices {
               context,
               MaterialPageRoute(
                 builder: (context){
-                  return Home();
+                  return Home(receivedAction: null,);
                 }
                 )
               );
@@ -32,7 +32,7 @@ class AuthServices {
                     context,
                     MaterialPageRoute(
                       builder: (context){
-                  return Home();
+                  return Home(receivedAction: null,);
                 }));
                 }
               },

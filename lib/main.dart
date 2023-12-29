@@ -1,6 +1,7 @@
 import 'package:chatify/firebase_options.dart';
 import 'package:chatify/home.dart';
 import 'package:chatify/services/auth_services.dart';
+import 'package:chatify/services/notification_services.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -34,9 +35,34 @@ Future<void> main()async {
 );
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
+  static final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+
+  static const String homeRoute = '/home';
+  @override
+  void initState(){
+    NotificationServices.startListeningNotificationEvents();
+    super.initState();
+  }
+
+  List<Route<dynamic>> onGenerateInitialRoutes(String initialRouteName){
+    List<Route<dynamic>> pageStack = [];
+
+    pageStack.add(MaterialPageRoute(builder: (_) => const CheckAuthStatus()));
+
+    if(NotificationServices.initialActioin == null){
+      pageStack.add(MaterialPageRoute(builder: (_) => Home(receivedAction: null,)));
+    }
+    return pageStack;
+  }
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -83,7 +109,7 @@ class _CheckAuthStatusState extends State<CheckAuthStatus> {
             context,
             MaterialPageRoute(
               builder: (context) {
-                return Home();
+                return Home(receivedAction: null,);
               },
             ),
           );
