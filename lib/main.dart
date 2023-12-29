@@ -3,11 +3,27 @@ import 'package:chatify/home.dart';
 import 'package:chatify/services/auth_services.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+
+Future<void> firebaseMessagingBackgroundHandler(RemoteMessage remoteMessage) async{
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+}
 Future<void> main()async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options:DefaultFirebaseOptions.currentPlatform);
+  FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
+  FirebaseMessaging.onMessage.listen(
+    (RemoteMessage remoteMessage) async {
+      await Fluttertoast.showToast(
+        msg:"@${remoteMessage.data['name']} : ${remoteMessage.data['text']}",
+        gravity: ToastGravity.TOP,
+        backgroundColor: Colors.green
+      );
+    }
+    );
   runApp(const MyApp());
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
     systemNavigationBarColor: Colors.white,

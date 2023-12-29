@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ChatServices{
 
-  sentTextMessage({required String receiver, required String text}){
+  sendTextMessage({required String receiver, required String text}){
 //-----------Sender---------------------
     DocumentReference chatDocRef = 
      chatsCollection(user: currentUser).doc(receiver);
@@ -28,7 +28,8 @@ class ChatServices{
       'id':messageDocref.id,
       'text': text,
       'sender': currentUser,
-      'receiver':DateTime.now(),
+      'receiver': receiver,
+      'time':DateTime.now(),
       'sent': false
     }
   );
