@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:awesome_notifications/awesome_notifications.dart';
+import 'package:chatify/main.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 
@@ -37,6 +38,9 @@ class NotificationServices{
   static Future<void> onActionReceivedMethod(ReceivedAction receivedAction) async {
     if(receivedAction.buttonKeyPressed == "READ"){
 
+      MyApp.navigatorKey.currentState?.pushNamedAndRemoveUntil(
+        '/home', (route)=> (route.settings.name =='/home') 
+        || route.isFirst, arguments:receivedAction);
     }
 
   }

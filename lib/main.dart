@@ -1,3 +1,4 @@
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:chatify/firebase_options.dart';
 import 'package:chatify/home.dart';
 import 'package:chatify/services/auth_services.dart';
@@ -10,11 +11,15 @@ import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 Future<void> firebaseMessagingBackgroundHandler(RemoteMessage remoteMessage) async{
+
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
+  await NotificationServices.showNotification(remoteMessage: remoteMessage);
 }
 Future<void> main()async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options:DefaultFirebaseOptions.currentPlatform);
+  await NotificationServices.initializeLocalNotification();
   FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
   FirebaseMessaging.onMessage.listen(
     (RemoteMessage remoteMessage) async {
@@ -59,15 +64,35 @@ class _MyAppState extends State<MyApp> {
     pageStack.add(MaterialPageRoute(builder: (_) => const CheckAuthStatus()));
 
     if(NotificationServices.initialActioin == null){
-      pageStack.add(MaterialPageRoute(builder: (_) => Home(receivedAction: null,)));
+      pageStack.add(MaterialPageRoute(builder: (_) => Home(
+        receivedAction: NotificationServices.initialActioin,
+        )
+      ));
     }
     return pageStack;
   }
+
+Route<dynamic>? onGenerateRoute(RouteSettings settings){
+  switch(settings.name){
+    case homeRoute:
+    ReceivedAction receivedAction = settings.arguments as ReceivedAction;
+    return MaterialPageRoute(
+      builder: (context)=>Home(
+        receivedAction: receivedAction)
+      );
+      
+  }
+  return null;
+}
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Chattily',
       debugShowCheckedModeBanner: false,
+      navigatorKey: MyApp.navigatorKey,
+      onGenerateInitialRoutes: onGenerateInitialRoutes,
+      onGenerateRoute: onGenerateRoute,
       theme: ThemeData(
         scaffoldBackgroundColor: Colors.white.withOpacity(0.5),
         appBarTheme:AppBarTheme(
@@ -84,7 +109,6 @@ class _MyAppState extends State<MyApp> {
         )
       ),
       ),
-      home: const CheckAuthStatus(),
     );
   }
 }
@@ -109,7 +133,7 @@ class _CheckAuthStatusState extends State<CheckAuthStatus> {
             context,
             MaterialPageRoute(
               builder: (context) {
-                return Home(receivedAction: null,);
+                return const Home(receivedAction: null,);
               },
             ),
           );
