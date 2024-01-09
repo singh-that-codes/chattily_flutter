@@ -33,7 +33,7 @@ Future<void> main()async {
   runApp(const MyApp());
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
     systemNavigationBarColor: Colors.white,
-    systemNavigationBarIconBrightness: Brightness.light,
+    systemNavigationBarIconBrightness: Brightness.dark,
     statusBarColor: Colors.white,
     statusBarIconBrightness: Brightness.dark,
   )
